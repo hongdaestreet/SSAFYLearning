@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+		
+		<!-- Web과 직접적으로 관련된 설정을 하는 파일 -->
+		
+		<!-- 뷰리졸버 -->
+		<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/view/"></property> <!-- setter 들 --> <!-- 공용으로 쓸 수 있는 prefix -->
+		<property name="suffix" value=".jsp"></property> <!-- 경로가 뒤에 자동으로 붙음 -->
+		</bean>
+		
+		<!-- HablerMapping은 기본으로 사용하는거 있어서 설ㅈㅇX -->
+		<!-- Controller -->
+		<context:component-scan base-package="com.ssafy.mvc.controller"></context:component-scan>
+		
+		
+		
+</beans>
