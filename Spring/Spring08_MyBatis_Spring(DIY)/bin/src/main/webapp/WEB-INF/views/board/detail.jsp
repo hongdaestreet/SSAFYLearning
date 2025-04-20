@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>게시글 상세보기</title>
-<%@ include file="../common/bootstrap.jsp" %>  <!-- bootstrap도 사용하겠다 -->
+<%@ include file="../common/bootstrap.jsp" %>
 </head>
 <body>
 	<div class="container">
