@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.mvc.model.dao.BoardDao">
+
+
+	<!-- 전체 게시글 조회 -->
+	<select id="selectAll" resultType="Board">
+		SELECT *
+		FROM board;
+	</select>
+	
+	<!-- 상세 게시글 조회 -->
+	<select id="selectOne" resultType="Board" parameterType="int">
+		SELECT * FROM board
+		WHERE id = #{id};
+	</select>
+	
+	<!-- 게시글 등록 -->
+	<insert id="insertBoard" parameterType="Board">
+		INSERT INTO board (title, writer, content)
+		VALUES (#{title}, #{writer}, #{content});
+	</insert>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="deleteBoard" parameterType="int">
+		DELETE FROM board
+		WHERE id = #{id};
+	</delete>
+	
+	<!-- 게시글 수정 -->
+	<update id="updateBoard" parameterType="Board">
+		UPDATE board
+		SET title = #{title}, content = #{content}, reg_date = now()
+		WHERE id = #{id};
+	</update>
+	
+	<!-- 조회수 증가 -->
+	<update id="updateViewCnt" parameterType="int">
+		UPDATE board
+		SET view_cnt = view_cnt+1
+		WHERE id = #{id}
+	</update>
+	
+	<!-- 검색 기능 -->
+	<select id="search" parameterType="SearchCondition" resultType="board"> 
+		SELECT * FROM board
+		<if test="key != 'none'">  <!-- 검색기준 - key, word, orderBy, orderByDir 중에 하나 선택 -->
+			WHERE ${key} LIKE #{word} <!-- #은 문자열 --> <!-- concat('%',#{word},'%')하거나 serviceImpl에서 붙여줘도 됨 -->
+		</if>
+		<!-- 정렬 조건 -->
+		<if test="orderBy != 'none'"> <!-- 정렬기준 -->
+			ORDER BY ${orderBy} ${orderByDir} 									<!-- *** 세미콜론 안붙여도 됨. 알아서 해줌 -->
+		</if>
+	
+	</select>
+	
+	
+	
+	
+	
+	
+</mapper>

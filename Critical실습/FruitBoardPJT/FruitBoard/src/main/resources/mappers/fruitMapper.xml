@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.debug.model.dao.FruitDao"> <!-- 정확한 경로 설정해야 함 -->
+    <insert id="insertFruit" parameterType="FruitDto">
+        INSERT INTO fruits (fruit_name, taste, price, quantity)
+        VALUES (#{fruitName}, #{taste}, #{price}, #{quantity})
+    </insert>
+
+    <select id="selectFruitList" resultType="FruitDto">
+        SELECT fruit_id   AS fruitId,
+               fruit_name AS fruitName,
+               price,
+               taste,
+               quantity
+          FROM fruits
+         ORDER BY fruit_id ASC
+    </select>
+
+    <select id="selectFruitDetail" resultType="FruitDto">
+        SELECT *
+          FROM fruits
+         WHERE fruit_id = #{fruitId}
+    </select>
+
+    <delete id="deleteFruit" parameterType="int">
+        DELETE FROM fruits
+         WHERE fruit_id = #{fruitId}
+    </delete>
+
+    <update id="updateFruit" parameterType="FruitDto">
+        UPDATE fruits
+           SET fruit_name = #{fruitName},
+               taste      = #{taste},
+               price      = #{price},
+               quantity   = #{quantity}
+           WHERE fruit_id = #{fruitId}
+    </update>
+</mapper>
