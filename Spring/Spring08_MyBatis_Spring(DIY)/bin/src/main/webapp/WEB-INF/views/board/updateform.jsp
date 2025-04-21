@@ -11,7 +11,7 @@
 	<div class="container">
 		<h2>글수정</h2>
 		<form action="update" method="POST">
-			<input type="hidden" name="id" value="${board.id}">  <!-- value가 채워져있는지 확인 -->
+			<input type="hidden" name="id" value="${board.id}">
 			<div class="mb-3">
 				<label for="title" class="form-label">글제목</label>
 				<input type="text" class="form-control" id="title" name="title" value="${board.title}">

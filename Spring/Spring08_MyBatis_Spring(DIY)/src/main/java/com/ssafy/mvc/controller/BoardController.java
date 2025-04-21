@@ -46,13 +46,13 @@ public class BoardController {
 	
 	@GetMapping("/detail")
 	public String detail(@RequestParam("id") int id, Model model) {
-		Board board = boardService.readBoard(id);
-		model.addAttribute("board", board);
+		Board board = boardService.readBoard(id); // id에 맞는 board 들고 와서
+		model.addAttribute("board", board); // model에 추가해주기
 		return "/board/detail";
 	}
 	
 	@GetMapping("/delete")  // GET요청으로 삭제하는 방법은 좋지 않음
-	public String deleteByGet(@RequestParam("id") int id) {
+	public String deleteByGet(@RequestParam("id") int id) {  // 특정 게시물 -> parameter id 사용
 		boardService.removeBoard(id); // id에 맞는 게시글 삭제
 		return "redirect:list";
 	}
@@ -64,13 +64,13 @@ public class BoardController {
 	}
 	
 	@GetMapping("/updateform")
-	public String updateForm(@RequestParam("id") int id, Model model) {  // 게시글 읽어와야하니까 model 바구니 필요함
+	public String updateForm(@RequestParam("id") int id, Model model) {  // 게시글 읽어와야하니까 model 바구니 필요함 + 특정 게시물로 가야 하므로 id 가져옴
 		model.addAttribute("board",boardService.getBoard(id));  // getBoard로 조회수 안올리고 조회
 		return "/board/updateform";
 	}
 	
-	@PostMapping("/update")
-	public String update(@ModelAttribute Board board) {
+	@PostMapping("/update")  // updateform에서 받아온 요청 처리 -> POST
+	public String update(@ModelAttribute Board board) {  // board 정보 받아옴 (ModelAttribute)
 		boardService.modifyBoard(board);  // update에서의 board에는 id가 있음 (기존에 있는걸 바꾸니까)
 		return "redirect:detail?id="+board.getId();
 	}
